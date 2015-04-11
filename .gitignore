@@ -1,0 +1,5 @@
+*.o
+bin/
+test/
+*.txt
+*.data
