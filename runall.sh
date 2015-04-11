@@ -3,3 +3,4 @@
 ./run2.sh
 ./run3.sh
 ./run4.sh
+./bin/processData
