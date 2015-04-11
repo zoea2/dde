@@ -3,6 +3,7 @@
 #include <assert.h>
 #define D_MAX 0x7FFFFFFFFFFFFFFF
 #define ALL_TIMES 50
+#define maxGen 2000
 void setRand();
 double randomNumber(double low = 0,double high = 1);
 

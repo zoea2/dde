@@ -1,4 +1,5 @@
 #include <iostream>
+#include "general.h"
 #include <fstream>
 #include <stdio.h>
 #include <string>
@@ -10,7 +11,7 @@ int main(){
 	for(int i = 1;i <= 13;i++)
 		output << "," << i;
 	output<<endl;
-	const int num = 5;
+	const int num = 8;
 	for(int i = 0;i < num;i++){
 		ifstream input;
 		string filename = "output";
@@ -22,11 +23,11 @@ int main(){
 		string tmp;
 		output << "main" << i;
 		for(int k = 0; k < 13;k++){
-			for(int j = 0;j < 101;j++)
+			for(int j = 0;j < 1+2*ALL_TIMES;j++)
 				getline(input,tmp);
 			input >> tmp;
 			input >> tmp;
-			//cout<<tmp<<endl;
+		//	cout<<tmp<<endl;
 			double best;
 			input >> best;
 			output << "," << best;

@@ -78,7 +78,7 @@ int main(){
 		calcRange();
 		double arrayLow[vars];
 		double arrayUpper[vars];
-		int func = 1;
+		int func;
 		cin>>func;
 		for(int i = 0;i < vars;i++){
 			arrayLow[i] = functionRange[func][0];
@@ -94,7 +94,7 @@ int main(){
 		}
 
 		int gen = 0;
-		const int maxGen = 1000;
+		//const int maxGen = 1000;
 		Genotype best;
 		best.fitness = D_MAX;
 		for(gen = 0;gen <= maxGen;gen++){

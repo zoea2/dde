@@ -68,40 +68,44 @@ int main(){
 	setRand();
 	for(int times = 1;times <= ALL_TIMES;times++){
 		int num = 10;
-	//	double migrantRate = 0.3;
-		double crossRate = 0.3;
+		//double migrantRate = 0.9;
+		//double crossRate = 0.3;
 		double crossRate1 = 0.1;
 		double crossRate2 = 0.9;
-		double scale = 0.4;
-		double scale1 = 0.1;
-		double scale2 = 0.9;
+	//	double scale = 0.4;
+	//	double scale1 = 0.1;
+	//	double scale2 = 0.9;
 		calcRange();
 		double arrayLow[vars];
 		double arrayUpper[vars];
-		int func = 1;
+		int func;
 		cin>>func;
 		for(int i = 0;i < vars;i++){
 			arrayLow[i] = functionRange[func][0];
 			arrayUpper[i] = functionRange[func][1];
 		}
 		Population pop[subPop];
-		//不同的子种群采用随机生成的scale参数,并且每隔一定的代数就淘汰掉末尾的scale参数
+		//不同的子种群采用不同crossRate的参数,还有不同的变异策略，scale则使用main4的产生策略
 		for(int i = 0;i < subPop;i++){
-			double tmpScale = 1.0 / (2 * subPop) + i * 1.0 / subPop;
-			pop[i] = Population(num,crossRate,randomNumber(),arrayLow,arrayUpper,func);
-			
+			if(i % 2 == 0)
+				pop[i] = Population(num,crossRate1,randomNumber(),arrayLow,arrayUpper,func);
+			else
+				pop[i] = Population(num,crossRate2,randomNumber(),arrayLow,arrayUpper,func);
 		}
 
 		int gen = 0;
-		const int maxGen = 1000;
+		//const int maxGen = 1000;
+		const int changeScaleGen = 10;
 		Genotype best;
 		best.fitness = D_MAX;
-		const int changeScaleGen = 10;
 		for(gen = 0;gen <= maxGen;gen++){
 			for(int p = 0;p < subPop;p++){
 				for(int i = 0;i < num;i++){
 		//		printGeno(pop.genes[i]);
+					if(p < 2)
 						pop[p].mutationRand(i);
+					else
+						pop[p].mutationBest(i);
 					pop[p].genes[i].crossover(pop[p].crossRate);
 					pop[p].genes[i].evaluate(func);
 					pop[p].genes[i].selection();	
@@ -136,6 +140,7 @@ int main(){
 					}
 						
 				}	
+
 			}
 			if((gen + 1) % changeScaleGen == 0){
 				double minDis = D_MAX;
@@ -156,7 +161,6 @@ int main(){
 		}
 			printGeno(best);
 		avgBest += (best.fitness - avgBest) / times;
-
 	}
-	printf("average best:  %e\n",avgBest);
+	printf("average best: %e\n",avgBest);
 }

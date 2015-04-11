@@ -78,7 +78,7 @@ int main(){
 		calcRange();
 		double arrayLow[vars];
 		double arrayUpper[vars];
-		int func = 1;
+		int func;
 		cin>>func;
 		for(int i = 0;i < vars;i++){
 			arrayLow[i] = functionRange[func][0];
@@ -93,7 +93,7 @@ int main(){
 		}
 
 		int gen = 0;
-		const int maxGen = 1000;
+		//const int maxGen = 1000;
 		Genotype best;
 		best.fitness = D_MAX;
 		const int changeScaleGen = 10;
@@ -101,7 +101,7 @@ int main(){
 			for(int p = 0;p < subPop;p++){
 				for(int i = 0;i < num;i++){
 		//		printGeno(pop.genes[i]);
-						pop[p].mutationRand(i);
+					pop[p].mutationRand(i);
 					pop[p].genes[i].crossover(pop[p].crossRate);
 					pop[p].genes[i].evaluate(func);
 					pop[p].genes[i].selection();	

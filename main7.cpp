@@ -13,7 +13,7 @@
 #include "test_func.cpp"
 #include <algorithm>
 #include <cmath>
-#define subPop 4
+#define subPop 3
 using namespace std;
 //int fun = 1;
 void Genotype::evaluate(int fun){
@@ -72,8 +72,8 @@ int main(){
 		//double crossRate = 0.3;
 		double crossRate1 = 0.1;
 		double crossRate2 = 0.9;
-		double crSet[] = {0.1,0.9};
-		double scaleSet[] = {0.3,0.6};
+		double crSet[] = {0.1,0.5,0.9};
+		double scaleSet[] = {0.2,0.5,1.0};
 		double scale = 0.4;
 		double scale1 = 0.1;
 		double scale2 = 0.9;
@@ -88,11 +88,13 @@ int main(){
 		}
 		Population pop[subPop];
 		//不同的子种群采用不同crossRate和scale参数
-		int ii = 0;
-		for(int j = 0;j < 2;j++)
-			for(int k = 0;k < 2;k++)
-				pop[ii++] = Population(num,crSet[j],scaleSet[k],arrayLow,arrayUpper,func);
-
+		//for(int j = 0;j < 3;j++)
+		pop[0] = Population(num,crSet[0],scaleSet[0],arrayLow,arrayUpper,func);
+		for(int j = 1;j < subPop;j++){
+			pop[j] = Population(pop[0]);
+			pop[j].crossRate = crSet[j];
+			pop[j].scale = scaleSet[j];
+		}
 		int gen = 0;
 		//const int maxGen = 1000;
 		Genotype best;
