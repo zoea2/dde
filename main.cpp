@@ -60,6 +60,8 @@ void printGeno(Genotype geno){
 int main(){
 	double avgBest = 0;
 	setRand();
+	int func;
+	cin>>func;
 	for(int times = 1;times <= ALL_TIMES;times++){
 		int num = 40;
 		double crossRate = 0.3;
@@ -67,8 +69,6 @@ int main(){
 		calcRange();
 		double arrayLow[vars];
 		double arrayUpper[vars];
-		int func;
-		cin>>func;
 		for(int i = 0;i < vars;i++){
 			arrayLow[i] = functionRange[func][0];
 			arrayUpper[i] = functionRange[func][1];

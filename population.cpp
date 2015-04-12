@@ -4,9 +4,14 @@
 #include "general.h"
 #include <stdlib.h>
 using namespace std;
-Population::Population(){}
+Population::Population(){
+	genes = NULL;
+
+}
+
 Population::Population(int num,double crossRate,double scale,double arrayLow[],double arrayUpper[],int func){
 	this->num = num;
+	this->maxNum = num;
 	genes = new Genotype[num];
 	this->func = func;
 //	cout<<this->func<<endl;
@@ -22,22 +27,48 @@ Population::Population(int num,double crossRate,double scale,double arrayLow[],d
 	}
 	init();
 }
+Population::Population(int num,int maxNum,double crossRate,double scale,double arrayLow[],double arrayUpper[],int func){
+	this->num = num;
+	this->maxNum = maxNum;
+//	if(genes != NULL)
+//		delete [] genes;
+	genes = new Genotype[maxNum];
+	this->func = func;
+//	cout<<this->func<<endl;
+	//this->mutaRate = mutaRate;
+	this->crossRate = crossRate;
+	this->scale = scale;
+	for(int i = 0;i < num;i++){
+		//cout<<genes[i].low<<endl;
+		memcpy(genes[i].low,arrayLow,sizeof(genes[i].low));
+		memcpy(genes[i].upper,arrayUpper,sizeof(genes[i].upper));
+		//cout<<genes[i].low[0]<<endl;
+		//cout<<arrayLow[0]<<endl;
+	}
+	init();
+}
+
 
 Population::Population(const Population &population){ 
 	num = population.num;
+	maxNum = population.maxNum;
 	mutaRate = population.mutaRate;
 	crossRate = population.crossRate;
 	meanFit = population.meanFit;
 	scale = population.scale;
 	func = population.func;
 	bestgene = Genotype(population.bestgene);
-	genes = new Genotype[num];
-	for(int i = 0;i < num;i++){
+//	if(genes != NULL)
+//		delete [] genes;
+	genes = new Genotype[maxNum];
+	for(int i = 0;i < population.num;i++){
 		genes[i] = Genotype(population.genes[i]);
 	}
 }
 Population::~Population(){
-//	delete [] genes;
+//	if(genes != NULL)
+//		delete [] genes;
+	genes = NULL;
 }
 void Population::mutationRand(int i){
 		int r1 = randomNumber() * num;
@@ -47,7 +78,7 @@ void Population::mutationRand(int i){
 		while(r2 == r1 || r2 == num)
 			r2 = randomNumber() * num;
 		int r3 = randomNumber() * num;
-		while(r3 == r1 || r3 == r2 || r3 == num)
+		while(r3 == r1 || r3 == r2 || r3 == num )
 			r3 = randomNumber() * num;
 		for(int j = 0;j < vars;j++){
 			genes[i].tmpGene[j] = genes[r1].gene[j] + scale * (genes[r2].gene[j] - genes[r3].gene[j]);
@@ -84,7 +115,7 @@ void Population::init(){
 	preFit = bestgene.fitness;
 }
 void Population::keepBest(){
-	double minFit = bestgene.fitness;
+	double minFit = D_MAX;
 	int minIndex = -1;
 	for(int i = 0;i < num;i++){
 		if(minFit >= genes[i].fitness){
@@ -97,9 +128,15 @@ void Population::keepBest(){
 		bestgene = Genotype(genes[minIndex]);
 }
 void Population::calMeanFit(){
-	for(int i = 0; i < num ;i++){
-		meanFit += (genes[i].fitness - meanFit) / (i + 1);
+	if(num > 0){
+		int tmpMeanFit = 0;
+		for(int i = 0; i < num ;i++){
+			tmpMeanFit += (genes[i].fitness - tmpMeanFit) / (i + 1);
+		}
+		meanFit = tmpMeanFit;
 	}
+	else
+		meanFit = D_MAX;
 }
 int Population::findWorstIdx(){
 	double maxFit = genes[0].fitness;

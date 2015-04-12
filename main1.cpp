@@ -61,6 +61,8 @@ void printGeno(Genotype geno){
 int main(){
 	double avgBest = 0;
 	setRand();
+	int func;
+	cin>>func;
 	for(int times = 1;times <= ALL_TIMES;times++){
 		int num = 10;
 		double migrantRate = 0.4;
@@ -69,8 +71,6 @@ int main(){
 		calcRange();
 		double arrayLow[vars];
 		double arrayUpper[vars];
-		int func;
-		cin>>func;
 		for(int i = 0;i < vars;i++){
 			arrayLow[i] = functionRange[func][0];
 			arrayUpper[i] = functionRange[func][1];
@@ -99,7 +99,7 @@ int main(){
 			}
 			//迁移，将best替换掉邻居的random
 			for(int p = 0;p < subPop;p++){
-				//double migrantRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
+				//double migrantRate= 0.01 + 0.99 * (exp(10 * gen / maxgen) - 1) / (exp(10) - 1);
 				if(randomNumber() <= migrantRate){
 					int r = randomNumber() * num;
 					while(r >= num)

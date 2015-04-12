@@ -66,7 +66,9 @@ void printGeno(Genotype geno){
 int main(){
 	double avgBest = 0;
 	setRand();
-	for(int times = 1;times <= ALL_TIMES;times++){
+	int func;
+	cin>>func;
+for(int times = 1;times <= ALL_TIMES;times++){
 		int num = 10;
 		//double migrantRate = 0.9;
 		//double crossRate = 0.3;
@@ -78,8 +80,6 @@ int main(){
 		calcRange();
 		double arrayLow[vars];
 		double arrayUpper[vars];
-		int func;
-		cin>>func;
 		for(int i = 0;i < vars;i++){
 			arrayLow[i] = functionRange[func][0];
 			arrayUpper[i] = functionRange[func][1];
@@ -121,9 +121,9 @@ int main(){
 		//	for(int p = 0;p < subPop;p++)
 		//		cout<<pop[p].meanFit<<endl;
 		//迁移策略:将各子种群算出其平均适应值，并且按照从优到差排序，然后好的种群向比他差的种群都迁移一个个体
+			double migrantRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
 			for(int p = 0;p < subPop;p++){
 				for(int q = p+1;q < subPop;q++){
-					double migrantRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
 					if(randomNumber() <= migrantRate){
 						int r = randomNumber() * num;
 						while (r == num)

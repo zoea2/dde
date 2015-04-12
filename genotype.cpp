@@ -23,6 +23,7 @@ Genotype::Genotype(const Genotype &genotype)
 	memcpy(tmpGene,genotype.tmpGene,sizeof(tmpGene));
 }
 
+Genotype::~Genotype(){}
 void Genotype::crossover(double crossRate){
     int jRand = randomNumber(0,vars);
     for (int i = 0;i < vars;i++){

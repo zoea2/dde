@@ -15,6 +15,7 @@ class Genotype{
 public:
 		Genotype();
 		Genotype(const Genotype &genotype);
+		~Genotype();
         double fitness;
         double tmpFitness;
         double low[vars];
