@@ -148,7 +148,7 @@ int main(){
 					}
 					pop[p].preFit = pop[p].bestgene.fitness;
 				}
-				minIdx = randomNumber(0,subPop);
+				//minIdx = randomNumber(0,subPop);
 				assert(minIdx > -1 && minIdx < subPop);
 				pop[minIdx].scale = randomNumber();
 				
