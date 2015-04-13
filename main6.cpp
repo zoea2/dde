@@ -69,7 +69,7 @@ int main(){
 	int func;
 	cin>>func;
 	for(int times = 1;times <= ALL_TIMES;times++){
-		int num = 10;
+		int num = maxPop / subPop;
 		//double migrantRate = 0.9;
 		//double crossRate = 0.3;
 		double crossRate1 = 0.1;
@@ -88,7 +88,7 @@ int main(){
 		}
 		Population pop[subPop];
 		//不同的子种群采用不同crossRate和scale参数
-		for(int j = 0;j < 3;j++)
+		for(int j = 0;j < subPop;j++)
 			pop[j] = Population(num,crSet[j],scaleSet[j],arrayLow,arrayUpper,func);
 
 		int gen = 0;

@@ -69,12 +69,12 @@ int main(){
 	int func;
 	cin>>func;
 	for(int times = 1;times <= ALL_TIMES;times++){
-		int num = 10;
+		int num = maxPop / subPop; 
 		//double migrantRate = 0.9;
 		//double crossRate = 0.3;
 		double crossRate1 = 0.1;
 		double crossRate2 = 0.9;
-		double scale = 0.4;
+		double scale = 0.5;
 		double scale1 = 0.1;
 		double scale2 = 0.9;
 		calcRange();
@@ -88,9 +88,9 @@ int main(){
 		//不同的子种群采用不同crossRate的参数,还有不同的变异策略
 		for(int i = 0;i < subPop;i++){
 			if(i % 2 == 0)
-				pop[i] = Population(num,num * subPop,crossRate1,scale,arrayLow,arrayUpper,func);
+				pop[i] = Population(num,crossRate1,scale,arrayLow,arrayUpper,func);
 			else
-				pop[i] = Population(num,num * subPop,crossRate2,scale,arrayLow,arrayUpper,func);
+				pop[i] = Population(num,crossRate2,scale,arrayLow,arrayUpper,func);
 		}
 		//cout<<"init complete"<<endl;
 		int gen = 0;
@@ -143,9 +143,15 @@ int main(){
 						//best->worst
 					//	pop[q].genes[worstIdx] = Genotype(pop[p].bestgene);	
 						*/
-						pop[p].genes[pop[p].num] = Genotype(pop[q].genes[r]);
+						Genotype* tmpGenes = new Genotype[pop[p].num+1];
+						for(int indi = 0;indi < pop[p].num;indi++){
+							tmpGenes[indi] = Genotype(pop[p].genes[indi]);
+						}
+						tmpGenes[pop[p].num] = Genotype(pop[q].genes[r]);
+						delete [] pop[p].genes;
+						pop[p].genes = tmpGenes;
+						tmpGenes = NULL;
 						pop[p].num++;
-						assert(pop[p].num <= pop[p].maxNum);
 						pop[q].num--;
 						assert(pop[q].num >= 0);
 						pop[q].genes[r] = Genotype(pop[q].genes[pop[q].num]);

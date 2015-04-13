@@ -63,7 +63,7 @@ int main(){
 	int func;
 	cin>>func;
 	for(int times = 1;times <= ALL_TIMES;times++){
-		int num = 40;
+		int num = maxPop;
 		double crossRate = 0.3;
 		double scale = 0.4;
 		calcRange();

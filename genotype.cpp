@@ -17,10 +17,12 @@ Genotype::Genotype(const Genotype &genotype)
 {
 	fitness = genotype.fitness;
 	tmpFitness = genotype.tmpFitness;
-	memcpy(low,genotype.low,sizeof(low));
-	memcpy(upper,genotype.upper,sizeof(upper));
-	memcpy(gene,genotype.gene,sizeof(gene));
-	memcpy(tmpGene,genotype.tmpGene,sizeof(tmpGene));
+	for(int i = 0;i < vars;i++){
+		low[i] = genotype.low[i];
+		upper[i] = genotype.upper[i];
+		gene[i] = genotype.gene[i];
+		tmpGene[i] = genotype.tmpGene[i];
+	}
 }
 
 Genotype::~Genotype(){}

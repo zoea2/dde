@@ -69,7 +69,7 @@ int main(){
 	int func;
 	cin>>func;
 for(int times = 1;times <= ALL_TIMES;times++){
-		int num = 10;
+		int num = maxPop / subPop;
 		//double migrantRate = 0.9;
 		//double crossRate = 0.3;
 		double crossRate1 = 0.1;
