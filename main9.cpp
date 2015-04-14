@@ -130,7 +130,7 @@ int main(){
 				pop[p].calMeanFit();
 			sort(pop,pop+subPop,cmp);
 			for(int p = 0;p < subPop;p++)
-				cout<<p<<" "<<pop[p].meanFit<<endl;
+				//cout<<p<<" "<<pop[p].meanFit<<endl;
 		//迁移策略:将各子种群算出其平均适应值，并且按照从优到差排序，然后好的种群向比他差的种群都迁移一个个体
 			for(int p = 0;p < subPop;p++){
 				for(int q = p+1;q < subPop;q++){
