@@ -13,6 +13,18 @@
 using namespace std;
 
 Genotype::Genotype() {}
+Genotype::Genotype(double arrayLow[],double arrayUpper[],int func){
+	memcpy(low,arrayLow,sizeof(low));
+	memcpy(upper,arrayUpper,sizeof(upper));
+	for(int j = 0;j < vars;j++){
+		tmpGene[j] = low[j] + randomNumber() * (upper[j] - low[j]);
+//			cout<<genes[i].tmpGene[j]<<endl;
+	}
+	evaluate(func);
+	fitness = D_MAX;
+	selection();
+
+}
 Genotype::Genotype(const Genotype &genotype)
 {
 	fitness = genotype.fitness;

@@ -13,4 +13,5 @@
 ./run12.sh
 ./run13.sh
 ./run14.sh
+./run15.sh
 ./bin/processData

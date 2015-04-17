@@ -15,6 +15,7 @@ class Genotype{
 public:
 		Genotype();
 		Genotype(const Genotype &genotype);
+		Genotype(double[],double[],int func);
 		~Genotype();
         double fitness;
         double tmpFitness;

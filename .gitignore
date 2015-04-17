@@ -4,3 +4,4 @@ test/
 *.txt
 *.data
 .DS_Store
+*.swp
