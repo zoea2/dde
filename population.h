@@ -11,6 +11,7 @@ public:
 	Population(int num,double crossRate, double scale,double arrayLow[],double arratUpper[],int func);
 	Genotype* genes;
 	Genotype bestgene;
+	Genotype worstgene;
 	int num;
 	int maxNum;
 	double mutaRate;
@@ -25,7 +26,7 @@ public:
 	void mutationBest(int i);
 	void mutationRandToBest(int i);
 	void init();
-	void keepBest();
+	int keepBest();
 };
 
 #endif

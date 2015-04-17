@@ -9,4 +9,8 @@
 ./run8.sh
 ./run9.sh
 ./run10.sh
+./run11.sh
+./run12.sh
+./run13.sh
+./run14.sh
 ./bin/processData

@@ -105,7 +105,7 @@ void Population::init(){
 	keepBest();
 	preFit = bestgene.fitness;
 }
-void Population::keepBest(){
+int Population::keepBest(){
 	double minFit = D_MAX;
 	int minIndex = -1;
 	for(int i = 0;i < num;i++){
@@ -117,6 +117,7 @@ void Population::keepBest(){
 	}
 	if(minIndex >= 0)
 		bestgene = Genotype(genes[minIndex]);
+	return minIndex;
 }
 void Population::calMeanFit(){
 	if(num > 0){
@@ -130,13 +131,15 @@ void Population::calMeanFit(){
 		meanFit = D_MAX;
 }
 int Population::findWorstIdx(){
-	double maxFit = genes[0].fitness;
-	int worstIdx = 0;
-	for(int i = 1;i < num;i++){
+	double maxFit = -100000;
+	int worstIdx = -1;
+	for(int i = 0;i < num;i++){
 		if(maxFit < genes[i].fitness){
 			worstIdx = i;
 			maxFit = genes[i].fitness;
 		}
 	}
+	if(worstIdx > -1)
+		worstgene = Genotype(genes[worstIdx]);
 	return worstIdx;
 }

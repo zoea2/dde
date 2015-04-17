@@ -11,7 +11,7 @@ int main(){
 	for(int i = 1;i <= 13;i++)
 		output << "," << i;
 	output<<endl;
-	const int num = 11;
+	const int num = 15;
 	for(int i = 0;i < num;i++){
 		ifstream input;
 		string filename = "output";
