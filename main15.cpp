@@ -146,8 +146,8 @@ int main(){
 				if(pop[p].bestgene.fitness == pop[p].preFit)
 					break;
 				for(int q = p+1;q < subPop;q++){
-					double migrantRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
-				//	double migrantRate = 0.01;
+			//		double migrantRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
+					double migrantRate = 0.4;
 					if(pop[q].num > 0 && randomNumber() <= migrantRate){
 						int r = randomNumber() * pop[q].num;
 						while (r == pop[q].num)

@@ -148,7 +148,7 @@ int main(){
 				while (q == subPop)
 					q = randomNumber(p,subPop);
 				//double migrantRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
-				double migrantRate = 0.02;
+				double migrantRate = 0.4;
 				if(pop[q].num > 0 && randomNumber() <= migrantRate){
 				//	int r = randomNumber() * pop[q].num;
 				//	while (r == pop[q].num)
@@ -165,6 +165,9 @@ int main(){
 					for(int indi = 0;indi < pop[p].num;indi++){
 						tmpGenes[indi] = Genotype(pop[p].genes[indi]);
 					}
+					int r1 = randomNumber(0,pop[p].num);
+					while(r1 >= pop[p].num)
+						r1 = randomNumber(0,pop[p].num);
 					tmpGenes[pop[p].num] = Genotype(pop[p].bestgene);
 					delete [] pop[p].genes;
 					pop[p].genes = tmpGenes;
