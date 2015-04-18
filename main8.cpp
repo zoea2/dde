@@ -77,6 +77,7 @@ int main(){
 		double scale = 0.5;
 		double scale1 = 0.1;
 		double scale2 = 0.9;
+		int mutationTypeSet[] = {1,1,2,2};
 		calcRange();
 		double arrayLow[vars];
 		double arrayUpper[vars];
@@ -88,9 +89,9 @@ int main(){
 		//不同的子种群采用不同crossRate的参数,还有不同的变异策略
 		for(int i = 0;i < subPop;i++){
 			if(i % 2 == 0)
-				pop[i] = Population(num,crossRate1,scale,arrayLow,arrayUpper,func);
+				pop[i] = Population(num,mutationTypeSet[i],crossRate1,scale,arrayLow,arrayUpper,func);
 			else
-				pop[i] = Population(num,crossRate2,scale,arrayLow,arrayUpper,func);
+				pop[i] = Population(num,mutationTypeSet[i],crossRate2,scale,arrayLow,arrayUpper,func);
 		}
 		//cout<<"init complete"<<endl;
 		int gen = 0;
@@ -103,10 +104,8 @@ int main(){
 				for(int i = 0;i < pop[p].num;i++){
 		//		printGeno(pop.genes[i]);
 					//cout<<i<<" num "<<pop[p].num<<endl;
-					if(p < 2 && pop[p].num > 3)
-						pop[p].mutationRand(i);
-					else if(pop[p].num > 3)
-						pop[p].mutationBest(i);
+					if(pop[p].num > 3)
+						pop[p].mutation(i);
 					//cout<<"mutation complete"<<endl;
 					pop[p].genes[i].crossover(pop[p].crossRate);
 					//cout<<"crossover complete"<<endl;

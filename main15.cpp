@@ -13,7 +13,7 @@
 #include "test_func.cpp"
 #include <algorithm>
 #include <cmath>
-#define subPop 6
+#define subPop 3
 using namespace std;
 //int fun = 1;
 void Genotype::evaluate(int fun){

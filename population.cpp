@@ -8,9 +8,27 @@ Population::Population(){
 	genes = NULL;
 
 }
-
 Population::Population(int num,double crossRate,double scale,double arrayLow[],double arrayUpper[],int func){
 	this->num = num;
+	genes = new Genotype[num];
+	this->func = func;
+//	cout<<this->func<<endl;
+	//this->mutaRate = mutaRate;
+	this->crossRate = crossRate;
+	this->scale = scale;
+	for(int i = 0;i < num;i++){
+		//cout<<genes[i].low<<endl;
+		memcpy(genes[i].low,arrayLow,sizeof(genes[i].low));
+		memcpy(genes[i].upper,arrayUpper,sizeof(genes[i].upper));
+		//cout<<genes[i].low[0]<<endl;
+		//cout<<arrayLow[0]<<endl;
+	}
+	init();
+}
+
+Population::Population(int num,int mutationType,double crossRate,double scale,double arrayLow[],double arrayUpper[],int func){
+	this->num = num;
+	this->mutationType = mutationType;
 	genes = new Genotype[num];
 	this->func = func;
 //	cout<<this->func<<endl;
@@ -46,6 +64,19 @@ Population::~Population(){
 //	if(genes != NULL)
 //		delete [] genes;
 	genes = NULL;
+}
+void Population::mutation(int i){
+	switch(mutationType){
+		case 1:
+			mutationRand(i);
+			break;
+		case 2:
+			mutationBest(i);
+			break;
+		case 3:
+			mutationRandToBest(i);
+			break;
+	}
 }
 void Population::mutationRand(int i){
 		int r1 = randomNumber() * num;
@@ -142,4 +173,6 @@ int Population::findWorstIdx(){
 	if(worstIdx > -1)
 		worstgene = Genotype(genes[worstIdx]);
 	return worstIdx;
+}
+Genotype genNewGeno(){
 }

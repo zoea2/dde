@@ -13,7 +13,7 @@
 #include "test_func.cpp"
 #include <algorithm>
 #include <cmath>
-#define subPop 6
+#define subPop 3
 using namespace std;
 //int fun = 1;
 void Genotype::evaluate(int fun){
@@ -144,34 +144,36 @@ int main(){
 			for(int p = 0;p < subPop;p++){
 				if(pop[p].bestgene.fitness == pop[p].preFit)
 					break;
-				for(int q = p+1;q < subPop;q++){
-					//double migrantRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
-					double migrantRate = 0.02;
-					if(pop[q].num > 0 && randomNumber() <= migrantRate){
-						int r = randomNumber() * pop[q].num;
-						while (r == pop[q].num)
-							r = randomNumber() * pop[q].num;
-						/*
-					//	int worstIdx = pop[q].findWorstIdx();
-						//best->random
-				//		pop[q].genes[r] = Genotype(pop[p].bestgene);
-						//best->worst
-					//	pop[q].genes[worstIdx] = Genotype(pop[p].bestgene);	
-						*/
-						Genotype* tmpGenes = new Genotype[pop[p].num+1];
-						for(int indi = 0;indi < pop[p].num;indi++){
-							tmpGenes[indi] = Genotype(pop[p].genes[indi]);
-						}
-						tmpGenes[pop[p].num] = Genotype(pop[p].bestgene);
-						delete [] pop[p].genes;
-						pop[p].genes = tmpGenes;
-						tmpGenes = NULL;
-						pop[p].num++;
-						pop[q].num--;
-						assert(pop[q].num >= 0);
-						pop[q].genes[r] = Genotype(pop[q].genes[pop[q].num]);
+				int q = randomNumber(p,subPop);
+				while (q == subPop)
+					q = randomNumber(p,subPop);
+				//double migrantRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
+				double migrantRate = 0.02;
+				if(pop[q].num > 0 && randomNumber() <= migrantRate){
+				//	int r = randomNumber() * pop[q].num;
+				//	while (r == pop[q].num)
+				//		r = randomNumber() * pop[q].num;
+					/*
+				//	int worstIdx = pop[q].findWorstIdx();
+					//best->random
+			//		pop[q].genes[r] = Genotype(pop[p].bestgene);
+					//best->worst
+				//	pop[q].genes[worstIdx] = Genotype(pop[p].bestgene);	
+					*/
+					int r = pop[q].findWorstIdx();
+					Genotype* tmpGenes = new Genotype[pop[p].num+1];
+					for(int indi = 0;indi < pop[p].num;indi++){
+						tmpGenes[indi] = Genotype(pop[p].genes[indi]);
 					}
-						
+					tmpGenes[pop[p].num] = Genotype(pop[p].bestgene);
+					delete [] pop[p].genes;
+					pop[p].genes = tmpGenes;
+					tmpGenes = NULL;
+					pop[p].num++;
+					pop[q].num--;
+					assert(pop[q].num >= 0);
+					pop[q].genes[r] = Genotype(pop[q].genes[pop[q].num]);
+					
 				}	
 			}
 			//cout<<"migrantion complete"<<endl;
