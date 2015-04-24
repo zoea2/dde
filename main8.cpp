@@ -95,7 +95,6 @@ int main(){
 		}
 		//cout<<"init complete"<<endl;
 		int gen = 0;
-		//const int maxGen = 1000;
 		Genotype best;
 		best.fitness = D_MAX;
 		for(gen = 0;gen <= maxGen;gen++){
@@ -135,13 +134,6 @@ int main(){
 						int r = randomNumber() * pop[q].num;
 						while (r == pop[q].num)
 							r = randomNumber() * pop[q].num;
-						/*
-					//	int worstIdx = pop[q].findWorstIdx();
-						//best->random
-				//		pop[q].genes[r] = Genotype(pop[p].bestgene);
-						//best->worst
-					//	pop[q].genes[worstIdx] = Genotype(pop[p].bestgene);	
-						*/
 						Genotype* tmpGenes = new Genotype[pop[p].num+1];
 						for(int indi = 0;indi < pop[p].num;indi++){
 							tmpGenes[indi] = Genotype(pop[p].genes[indi]);

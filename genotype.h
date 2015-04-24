@@ -23,6 +23,8 @@ public:
         double upper[vars];
         double gene[vars];
         double tmpGene[vars];
+		double genoScale;
+		double genoCrRate;
        // void mutation(Genotype);
         virtual void crossover(double crossRate);
         virtual void evaluate(int fun);

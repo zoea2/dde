@@ -49,6 +49,7 @@ Population::Population(const Population &population){
 	num = population.num;
 	mutaRate = population.mutaRate;
 	crossRate = population.crossRate;
+	mutationType = population.mutationType;
 	meanFit = population.meanFit;
 	scale = population.scale;
 	func = population.func;
@@ -95,6 +96,44 @@ void Population::mutationRand(int i){
 		}
 }
 
+void Population::jDEmutation(int i){
+		int r1 = randomNumber() * num;
+		while(r1 == num)
+			r1 = randomNumber() * num;
+		int r2 = randomNumber() * num;
+		while(r2 == r1 || r2 == num)
+			r2 = randomNumber() * num;
+		int r3 = randomNumber() * num;
+		while(r3 == r1 || r3 == r2 || r3 == num )
+			r3 = randomNumber() * num;
+		for(int j = 0;j < vars;j++){
+			genes[i].tmpGene[j] = genes[r1].gene[j] + genes[i].genoScale * (genes[r2].gene[j] - genes[r3].gene[j]);
+			if(genes[i].tmpGene[j] > genes[i].upper[j] || genes[i].tmpGene[j] < genes[i].low[j])
+				genes[i].tmpGene[j] = genes[i].low[j] + randomNumber() * (genes[i].upper[j] - genes[i].low[j]);
+		}
+}
+
+void Population::JADEmutation(double p,int i,vector<Genotype> vGeno){
+		int bestIdx = randomNumber(0,100 * p);
+		while(bestIdx >= 100 * p)
+			bestIdx = randomNumber(0,100 * p);
+		//cout<<bestIdx<<endl;
+		int r1 = randomNumber() * num;
+		while(r1 == num && r1 == i)
+			r1 = randomNumber() * num;
+		int aNum = vGeno.size();
+		int r2 = randomNumber() * (num + aNum); 
+		while(r2 == r1 || r2 == num + aNum || r2 == i)
+			r2 = randomNumber() * (num = aNum);
+		for(int j = 0;j < vars;j++){
+			if(r2 < num)
+				genes[i].tmpGene[j] = genes[i].gene[j] + genes[i].genoScale * (genes[r1].gene[j] - genes[r2].gene[j]) + genes[i].genoScale * (genes[bestIdx].gene[j] - genes[i].gene[j]);
+			else
+				genes[i].tmpGene[j] = genes[i].gene[j] + genes[i].genoScale * (genes[r1].gene[j] - vGeno[r2-num].gene[j]) + genes[i].genoScale * (genes[bestIdx].gene[j] - genes[i].gene[j]);
+			if(genes[i].tmpGene[j] > genes[i].upper[j] || genes[i].tmpGene[j] < genes[i].low[j])
+				genes[i].tmpGene[j] = genes[i].low[j] + randomNumber() * (genes[i].upper[j] - genes[i].low[j]);
+		}
+}
 void Population::mutationBest(int i){
 	int r1 = randomNumber() * num;
 	while(r1 == num)
@@ -108,6 +147,7 @@ void Population::mutationBest(int i){
 			genes[i].tmpGene[j] = genes[i].low[j] + randomNumber() * (genes[i].upper[j] - genes[i].low[j]);
 	}
 }
+
 void Population::mutationRandToBest(int i){
 	int r1 = randomNumber() * num;
 	while(r1 == num)
@@ -173,6 +213,4 @@ int Population::findWorstIdx(){
 	if(worstIdx > -1)
 		worstgene = Genotype(genes[worstIdx]);
 	return worstIdx;
-}
-Genotype genNewGeno(){
 }

@@ -112,10 +112,8 @@ int main(){
 				for(int i = 0;i < pop[p].num;i++){
 		//		printGeno(pop.genes[i]);
 					//cout<<i<<" num "<<pop[p].num<<endl;
-					if(p < 3 && pop[p].num > 3)
+					if(pop[p].num > 3)
 						pop[p].mutationRand(i);
-					else if(pop[p].num > 3)
-						pop[p].mutationBest(i);
 					//cout<<"mutation complete"<<endl;
 					pop[p].genes[i].crossover(pop[p].crossRate);
 					//cout<<"crossover complete"<<endl;
@@ -148,8 +146,8 @@ int main(){
 				while (q == subPop)
 					q = randomNumber(p,subPop);
 				//double migrantRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
-				double migrantRate = 0.4;
-				if(pop[q].num > 0 && randomNumber() <= migrantRate){
+				double survivalRate =  0.6;
+				if(pop[q].num > 0 && randomNumber() <= survivalRate){
 				//	int r = randomNumber() * pop[q].num;
 				//	while (r == pop[q].num)
 				//		r = randomNumber() * pop[q].num;

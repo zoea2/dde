@@ -23,12 +23,16 @@ Genotype::Genotype(double arrayLow[],double arrayUpper[],int func){
 	evaluate(func);
 	fitness = D_MAX;
 	selection();
+	this->genoScale = 0.5; 
+	this->genoCrRate = 0.5; 
 
 }
 Genotype::Genotype(const Genotype &genotype)
 {
 	fitness = genotype.fitness;
 	tmpFitness = genotype.tmpFitness;
+	genoScale = genotype.genoScale;
+	genoCrRate = genotype.genoCrRate;
 	for(int i = 0;i < vars;i++){
 		low[i] = genotype.low[i];
 		upper[i] = genotype.upper[i];

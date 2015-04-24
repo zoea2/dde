@@ -2,6 +2,8 @@
 #define _POPULATION_H
 
 #include "genotype.h"
+#include <vector>
+using namespace std;
 
 class Population{
 public:
@@ -14,7 +16,6 @@ public:
 	Genotype bestgene;
 	Genotype worstgene;
 	int num;
-	int mutationType;
 	int maxNum;
 	double mutaRate;
 	double crossRate;
@@ -25,12 +26,15 @@ public:
 	int findWorstIdx();	
 	void mutation(int i);
 	void mutationRand(int i);
+	void jDEmutation(int i);
+	void JADEmutation(double p,int i,vector<Genotype> vGeno);
 	void calMeanFit();
 	void mutationBest(int i);
 	void mutationRandToBest(int i);
 	void init();
 	int keepBest();
 	Genotype genNewGeno();
+	int mutationType;
 };
 
 #endif
