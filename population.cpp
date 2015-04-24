@@ -167,9 +167,10 @@ void Population::init(){
 		for(int j = 0;j < vars;j++){
 			genes[i].tmpGene[j] = genes[i].low[j] + randomNumber() * (genes[i].upper[j] - genes[i].low[j]);
 //			cout<<genes[i].tmpGene[j]<<endl;
+			genes[i].gene[j] = genes[i].tmpGene[j];
 		}
 		genes[i].evaluate(func);
-		genes[i].fitness = D_MAX;
+		genes[i].fitness = genes[i].tmpFitness;
 		genes[i].selection();
 	}
 	bestgene.fitness = D_MAX;

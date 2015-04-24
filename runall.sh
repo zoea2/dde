@@ -4,3 +4,4 @@
 ./run16.sh
 ./run17.sh
 ./bin/processData
+./bin/processFitness

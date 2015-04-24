@@ -12,7 +12,10 @@
 #include <string.h>
 using namespace std;
 
-Genotype::Genotype() {}
+Genotype::Genotype() {
+	fitness = D_MAX;
+}
+
 Genotype::Genotype(double arrayLow[],double arrayUpper[],int func){
 	memcpy(low,arrayLow,sizeof(low));
 	memcpy(upper,arrayUpper,sizeof(upper));

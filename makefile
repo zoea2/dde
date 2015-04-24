@@ -1,4 +1,4 @@
-all: ./bin/processData ./bin/main ./bin/main1 ./bin/main2 ./bin/main3 ./bin/main4 ./bin/main5 ./bin/main6 ./bin/main7 ./bin/main8 ./bin/main9 ./bin/main10 ./bin/main11 ./bin/main12 ./bin/main13 ./bin/main14 ./bin/main15 ./bin/main16 ./bin/main17 ./bin/main18 
+all: ./bin/processData ./bin/processFitness ./bin/main ./bin/main1 ./bin/main2 ./bin/main3 ./bin/main4 ./bin/main5 ./bin/main6 ./bin/main7 ./bin/main8 ./bin/main9 ./bin/main10 ./bin/main11 ./bin/main12 ./bin/main13 ./bin/main14 ./bin/main15 ./bin/main16 ./bin/main17 ./bin/main18 
 
 ./bin/main: population.o genotype.o general.o main.cpp
 	g++ -O3 -o ./bin/main main.cpp population.o genotype.o general.o 
@@ -12,6 +12,8 @@ all: ./bin/processData ./bin/main ./bin/main1 ./bin/main2 ./bin/main3 ./bin/main
 	g++ -O3 -o ./bin/main4 main4.cpp population.o genotype.o general.o 
 ./bin/processData: processData.cpp general.o
 	g++ -O3 -o ./bin/processData processData.cpp general.o 
+./bin/processFitness: processFitness.cpp general.o
+	g++ -O3 -o ./bin/processFitness processFitness.cpp general.o 
 ./bin/main5: population.o genotype.o general.o main5.cpp
 	g++ -O3 -o ./bin/main5 main5.cpp population.o genotype.o general.o 
 ./bin/main6: population.o genotype.o general.o main6.cpp
