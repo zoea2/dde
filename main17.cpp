@@ -100,6 +100,8 @@ int main(){
 			//	printGeno(pop.genes[i]);
 			}
 			pop.keepBest();
+			if(gen % 250 == 0 )
+				fprintf(stderr,"%e\n",pop.bestgene.fitness);
 		}
 		printGeno(pop.bestgene);
 		avgBest += (pop.bestgene.fitness - avgBest) / times;

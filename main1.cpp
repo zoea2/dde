@@ -86,7 +86,7 @@ int main(){
 			for(int p = 0;p < subPop;p++){
 				for(int i = 0;i < num;i++){
 		//		printGeno(pop.genes[i]);
-					pop[p].mutationRand(i);
+					pop[p].mutationBest(i);
 					pop[p].genes[i].crossover(pop[p].crossRate);
 					pop[p].genes[i].evaluate(func);
 					pop[p].genes[i].selection();	
@@ -107,7 +107,9 @@ int main(){
 					pop[(p+1)%subPop].genes[r] = Genotype(pop[p].bestgene);
 				}
 			}
-		}
+			if(gen % 250 == 0 )
+				fprintf(stderr,"%e\n",best.fitness);
+ 		}
 			printGeno(best);
 		avgBest += (best.fitness - avgBest) / times;
 	}
