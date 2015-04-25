@@ -12,7 +12,7 @@ int main(){
 	for(int i = 1;i <= 13;i++)
 		output << "," << i;
 	output<<endl;
-	const int num = 18;
+	const int num = 21;
 	for(int i = 0;i < num;i++){
 		ifstream input;
 		string filename = "output";
@@ -21,6 +21,8 @@ int main(){
 		filename.append(cTmp);
 		filename.append(".txt");
 		input.open(filename);
+		if(!input.is_open())
+			continue;
 		string tmp;
 		double fitnessSet[ALL_TIMES];
 		output << "main" << i;
