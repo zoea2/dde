@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "general.h"
 #include <fstream>
 #include <stdio.h>
@@ -43,12 +44,22 @@ int main(){
 		//	cout<<tmp<<endl;
 			double best;
 			input >> best;
+			char dTmp[100];
+			if(best > 0)
+				sprintf(dTmp,"%.2e",best);
+			else
+				sprintf(dTmp,"%e",best);
 			double stdDis = 0;
 			for(int t = 0;t < ALL_TIMES;t++)
 				stdDis += (fitnessSet[t] - best) * (fitnessSet[t] - best);
 			stdDis /= ALL_TIMES;
 			stdDis = sqrt(stdDis);
-			output << "," << best<<"("<<stdDis<<")";
+			char eTmp[100];
+			sprintf(eTmp,"%.2e",stdDis);
+			if(best > 0)
+				output << "," <<dTmp<<"("<<eTmp<<")";
+			else
+				output << "," <<best<<"("<<eTmp<<")";
 			input >> tmp;	//读取最后的换行符
 		}
 		output<<endl;
