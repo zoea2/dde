@@ -147,9 +147,9 @@ int main(){
 		//		double survivalRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
 				double survivalRate =  0.6;
 				if(pop[q].num > 0 && randomNumber() <= survivalRate){
-					int r = randomNumber() * pop[q].num;
-					while (r == pop[q].num)
-					r = randomNumber() * pop[q].num;
+					//int r = randomNumber() * pop[q].num;
+					//while (r == pop[q].num)
+					//r = randomNumber() * pop[q].num;
 					/*
 				//	int worstIdx = pop[q].findWorstIdx();
 					//best->random
@@ -157,7 +157,7 @@ int main(){
 					//best->worst
 				//	pop[q].genes[worstIdx] = Genotype(pop[p].bestgene);	
 					*/
-					//int r = pop[q].findWorstIdx();
+					int r = pop[q].findWorstIdx();
 					Genotype* tmpGenes = new Genotype[pop[p].num+1];
 					for(int indi = 0;indi < pop[p].num;indi++){
 						tmpGenes[indi] = Genotype(pop[p].genes[indi]);
@@ -165,7 +165,7 @@ int main(){
 					int r1 = randomNumber(0,pop[p].num);
 					while(r1 >= pop[p].num)
 						r1 = randomNumber(0,pop[p].num);
-					tmpGenes[pop[p].num] = Genotype(pop[p].genes[r1]);
+					tmpGenes[pop[p].num] = Genotype(pop[p].bestgene);
 					delete [] pop[p].genes;
 					pop[p].genes = tmpGenes;
 					tmpGenes = NULL;

@@ -8,7 +8,7 @@ using namespace std;
 int main(){
 	ofstream output;
 	output.open("evolution.csv");
-	const int num = 21;
+	const int num = 22;
 	for(int i = 0;i < num;i++){
 		ifstream input;
 		string filename = "evolution";
