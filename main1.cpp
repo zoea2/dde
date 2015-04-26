@@ -107,7 +107,7 @@ int main(){
 					pop[(p+1)%subPop].genes[r] = Genotype(pop[p].bestgene);
 				}
 			}
-			if(gen % 250 == 0 )
+			if(gen % (maxGen / point) == 0 )
 				fprintf(stderr,"%e\n",best.fitness);
  		}
 			printGeno(best);

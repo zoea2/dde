@@ -26,6 +26,7 @@ public:
 	int findWorstIdx();	
 	void mutation(int i);
 	void mutationRand(int i);
+	void mutationRand2(int i);
 	void jDEmutation(int i);
 	void JADEmutation(double p,int i,vector<Genotype> vGeno);
 	void calMeanFit();

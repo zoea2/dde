@@ -96,6 +96,28 @@ void Population::mutationRand(int i){
 		}
 }
 
+void Population::mutationRand2(int i){
+		int r1 = randomNumber() * num;
+		while(r1 == num)
+			r1 = randomNumber() * num;
+		int r2 = randomNumber() * num;
+		while(r2 == r1 || r2 == num)
+			r2 = randomNumber() * num;
+		int r3 = randomNumber() * num;
+		while(r3 == r1 || r3 == r2 || r3 == num )
+			r3 = randomNumber() * num;
+		int r4 = randomNumber() * num;
+		while(r4 == r1 || r4 == r2 || r4 == r3 || r4 == num)
+			r4 = randomNumber() * num;
+		int r5 = randomNumber() * num;
+		while(r5 == r1 || r5 == r2 || r5 == r3 || r5 == r4 || r5 == num)
+			r5 = randomNumber() * num;
+		for(int j = 0;j < vars;j++){
+			genes[i].tmpGene[j] = genes[r1].gene[j] + scale * (genes[r2].gene[j] - genes[r3].gene[j]) + scale * (genes[r4].gene[j] - genes[r5].gene[j]);
+			if(genes[i].tmpGene[j] > genes[i].upper[j] || genes[i].tmpGene[j] < genes[i].low[j])
+				genes[i].tmpGene[j] = genes[i].low[j] + randomNumber() * (genes[i].upper[j] - genes[i].low[j]);
+		}
+}
 void Population::jDEmutation(int i){
 		int r1 = randomNumber() * num;
 		while(r1 == num)

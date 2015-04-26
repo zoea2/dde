@@ -111,7 +111,7 @@ int main(){
 				for(int i = 0;i < pop[p].num;i++){
 		//		printGeno(pop.genes[i]);
 					//cout<<i<<" num "<<pop[p].num<<endl;
-					if(pop[p].num > 3)
+					if(pop[p].num > 2)
 						pop[p].mutationRand(i);
 					//cout<<"mutation complete"<<endl;
 					pop[p].genes[i].crossover(pop[p].crossRate);
@@ -145,7 +145,7 @@ int main(){
 				while (q == subPop)
 					q = randomNumber(p,subPop);
 		//		double survivalRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
-				double survivalRate =  0.6;
+				double survivalRate =  0.4;
 				if(pop[q].num > 0 && randomNumber() <= survivalRate){
 					//int r = randomNumber() * pop[q].num;
 					//while (r == pop[q].num)
@@ -178,7 +178,7 @@ int main(){
 			}
 			//cout<<"migrantion complete"<<endl;
 			//cout<<gen<<" "<<maxGen<<endl;
-			if(gen % 250 == 0 )
+			if(gen % (maxGen / point) == 0 )
 				fprintf(stderr,"%e\n",best.fitness);
 		}
 			printGeno(best);

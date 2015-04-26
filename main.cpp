@@ -86,7 +86,7 @@ int main(){
 			//	printGeno(pop.genes[i]);
 			}
 			pop.keepBest();
-			if(gen % 250 == 0 )
+			if(gen % (maxGen / point)== 0 )
 				fprintf(stderr,"%e\n",pop.bestgene.fitness);
 		}
 		printGeno(pop.bestgene);

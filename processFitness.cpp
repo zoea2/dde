@@ -21,15 +21,14 @@ int main(){
 			continue;
 		string tmp;
 		output << "main" << i<<endl;
-		double fitness[50][10];
+		double fitness[50][31];
 		for(int k = 0; k < 13;k++){
 			for(int j = 0;j < ALL_TIMES;j++){
-				input>>tmp;
-				for(int l = 0;l < 10;l++){
+				for(int l = 0;l < 1 + point ;l++){
 					input>>fitness[j][l];
 				}
 			}
-			for(int j = 0;j < 10;j++){
+			for(int j = 0;j < 1 + point;j++){
 				double avg = 0;
 				for(int l = 0;l < ALL_TIMES;l++){
 					avg += fitness[l][j];
