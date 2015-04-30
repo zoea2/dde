@@ -146,7 +146,7 @@ int main(){
 					q = randomNumber(p,subPop);
 		//		double survivalRate = 0.01 + 0.99 * (exp(10 * gen / maxGen) - 1) / (exp(10) - 1);
 				double survivalRate =  0.4;
-				if(pop[q].num > 0 && randomNumber() <= survivalRate){
+				if(pop[q].num > 10 && randomNumber() <= survivalRate){
 					//int r = randomNumber() * pop[q].num;
 					//while (r == pop[q].num)
 					//r = randomNumber() * pop[q].num;
