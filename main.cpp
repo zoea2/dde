@@ -64,8 +64,8 @@ int main(){
 	cin>>func;
 	for(int times = 1;times <= ALL_TIMES;times++){
 		int num = maxPop;
-		double crossRate = 0.3;
-		double scale = 0.4;
+		double crossRate = 0.1;
+		double scale = 0.9;
 		calcRange();
 		double arrayLow[vars];
 		double arrayUpper[vars];
